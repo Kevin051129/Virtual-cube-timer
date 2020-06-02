@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="stylesheet.css">
+
+  </head>
+  <body onkeydown=keys() onload=draw()>
+    <div class="penal">
+        <div class="options_display">
+          模式:
+          <select id="options">
+            <optgroup label="虛擬魔方">
+              <option value="hand_scramble">自由打亂</option>
+              <option value="type_scramble">手動輸入打亂</option>
+              <option value="random_scramble">隨機打亂</option>
+            </optgroup>
+            <optgroup label="一般計時">
+              <option value="3x3">3x3</option>
+            </optgroup>
+          </select>
+          <button type="button" onclick=option()>確定</button>
+          <button type="button" onclick=reset_UI()>reset UI</button>
+
+        </div>
+    </div>
+
+    <div id="stats">
+      <div id="stats_title">
+        <div><button type="button" id="stats_reset" onclick="stats_reset()">X</button>
+        </div>
+        <div></div>
+        <div>ao5</div>
+        <div>ao12</div>
+      </div>
+      <div id="stats_list">
+
+      </div>
+    </div>
+
+    <div class="container">
+        <div id="cube_display">
+          <div id="cube">
+
+            <div id="B_face">
+              <div>
+                <div class="F_tile B_corner_1"></div>
+                <div class="F_tile B_edge_1"></div>
+                <div class="F_tile B_corner_2"></div>
+              </div>
+              <div>
+                <div class="F_tile B_edge_4"></div>
+                <div class="F_tile center B_center" ></div>
+                <div class="F_tile B_edge_2" ></div>
+              </div>
+              <div>
+                <div class="F_tile B_corner_4" ></div>
+                <div class="F_tile B_edge_3" ></div>
+                <div class="F_tile B_corner_3" ></div>
+              </div>
+            </div>
+
+            <div id="U_face">
+              <div>
+                <div class="U_tile U_corner_1" ></div>
+                <div class="U_tile U_edge_1" ></div>
+                <div class="U_tile U_corner_2" ></div>
+              </div>
+              <div>
+                <div class="U_tile U_edge_4" ></div>
+                <div class="U_tile center U_center" ></div>
+                <div class="U_tile U_edge_2" ></div>
+              </div>
+              <div>
+                <div class="U_tile U_corner_4" ></div>
+                <div class="U_tile U_edge_3" ></div>
+                <div class="U_tile U_corner_3" ></div>
+              </div>
+            </div>
+
+            <div id="F_face">
+              <div>
+                <div class="F_tile F_corner_1" ></div>
+                <div class="F_tile F_edge_1" ></div>
+                <div class="F_tile F_corner_2" ></div>
+              </div>
+              <div>
+                <div class="F_tile F_edge_4" ></div>
+                <div class="F_tile center F_center" ></div>
+                <div class="F_tile F_edge_2" ></div>
+              </div>
+              <div>
+                <div class="F_tile F_corner_4" ></div>
+                <div class="F_tile F_edge_3" ></div>
+                <div class="F_tile F_corner_3" ></div>
+              </div>
+            </div>
+
+            <div id="R_face">
+              <div>
+                <div class="R_tile R_corner_1" ></div>
+                <div class="R_tile R_edge_1" ></div>
+                <div class="R_tile R_corner_2" ></div>
+              </div>
+              <div>
+                <div class="R_tile R_edge_4" ></div>
+                <div class="R_tile center R_center" ></div>
+                <div class="R_tile R_edge_2" ></div>
+              </div>
+              <div>
+                <div class="R_tile R_corner_4" ></div>
+                <div class="R_tile R_edge_3" ></div>
+                <div class="R_tile R_corner_3" ></div>
+              </div>
+            </div>
+
+            <div id="L_face">
+              <div>
+                <div class="R_tile L_corner_1" ></div>
+                <div class="R_tile L_edge_1" ></div>
+                <div class="R_tile L_corner_2" ></div>
+              </div>
+              <div>
+                <div class="R_tile L_edge_4" ></div>
+                <div class="R_tile center L_center" ></div>
+                <div class="R_tile L_edge_2" ></div>
+              </div>
+              <div>
+                <div class="R_tile L_corner_4" ></div>
+                <div class="R_tile L_edge_3" ></div>
+                <div class="R_tile L_corner_3" ></div>
+              </div>
+            </div>
+
+            <div id="D_face">
+              <div>
+                <div class="U_tile D_corner_1" ></div>
+                <div class="U_tile D_edge_1" ></div>
+                <div class="U_tile D_corner_2" ></div>
+              </div>
+              <div>
+                <div class="U_tile D_edge_4" ></div>
+                <div class="U_tile center D_center" ></div>
+                <div class="U_tile D_edge_2" ></div>
+              </div>
+              <div>
+                <div class="U_tile D_corner_4" ></div>
+                <div class="U_tile D_edge_3" ></div>
+                <div class="U_tile D_corner_3" ></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+        <div id="timer">
+          <div id="scramble_area">
+              <input type="text"  id="scramble">
+              <button type="button" id="scramble_button" onclick="type_scramble()">打亂</button>
+              <div id="scramble_display">
+                <p>你的打亂: </p>
+                <p id="display"> </p>
+              </div>
+          </div>
+          <div class="digit_area">
+            <div id="digits">
+              0.00
+            </div>
+          </div>
+        </div>
+
+        <div class="normal_timer">
+
+          <div class="timer_row">
+
+              <div class="scramble_face">
+                <div class="scramble_row">
+                  <div class="scramble_tile U_corner_1"></div>
+                  <div class="scramble_tile U_edge_1" ></div>
+                  <div class="scramble_tile U_corner_2" ></div>
+                </div>
+                <div class="scramble_row">
+                  <div class="scramble_tile U_edge_4" ></div>
+                  <div class="scramble_tile U_center" ></div>
+                  <div class="scramble_tile U_edge_2" ></div>
+                </div>
+                <div class="scramble_row">
+                  <div class="scramble_tile U_corner_4" ></div>
+                  <div class="scramble_tile U_edge_3" ></div>
+                  <div class="scramble_tile U_corner_3" ></div>
+                </div>
+              </div>
+              <div class="scramble_face">
+                <div class="scramble_row">
+                  <div class="scramble_tile D_corner_1" ></div>
+                  <div class="scramble_tile D_edge_1" ></div>
+                  <div class="scramble_tile D_corner_2" ></div>
+                </div>
+                <div class="scramble_row">
+                  <div class="scramble_tile D_edge_4" ></div>
+                  <div class="scramble_tile D_center" ></div>
+                  <div class="scramble_tile D_edge_2" ></div>
+                </div>
+                <div class="scramble_row">
+                  <div class="scramble_tile D_corner_4" ></div>
+                  <div class="scramble_tile D_edge_3" ></div>
+                  <div class="scramble_tile D_corner_3" ></div>
+                </div>
+              </div>
+
+
+          </div>
+
+
+          <div class="timer_row" id="3x3_scramble">
+          </div>
+
+          <div class="timer_row">
+            <div class="scramble_face">
+              <div class="scramble_row">
+                <div class="scramble_tile F_corner_1" ></div>
+                <div class="scramble_tile F_edge_1" ></div>
+                <div class="scramble_tile F_corner_2" ></div>
+              </div>
+              <div class="scramble_row">
+                <div class="scramble_tile F_edge_4" ></div>
+                <div class="scramble_tile F_center" ></div>
+                <div class="scramble_tile F_edge_2" ></div>
+              </div>
+              <div class="scramble_row">
+                <div class="scramble_tile F_corner_4" ></div>
+                <div class="scramble_tile F_edge_3" ></div>
+                <div class="scramble_tile F_corner_3" ></div>
+              </div>
+            </div>
+            <div class="scramble_face">
+              <div class="scramble_row">
+                <div class="scramble_tile R_corner_1" ></div>
+                <div class="scramble_tile R_edge_1" ></div>
+                <div class="scramble_tile R_corner_2" ></div>
+              </div>
+              <div class="scramble_row">
+                <div class="scramble_tile R_edge_4" ></div>
+                <div class="scramble_tile R_center" ></div>
+                <div class="scramble_tile R_edge_2" ></div>
+              </div>
+              <div class="scramble_row">
+                <div class="scramble_tile R_corner_4" ></div>
+                <div class="scramble_tile R_edge_3" ></div>
+                <div class="scramble_tile R_corner_3" ></div>
+              </div>
+            </div>
+            <div class="scramble_face">
+              <div class="scramble_row">
+                <div class="scramble_tile B_corner_1"></div>
+                <div class="scramble_tile B_edge_1"></div>
+                <div class="scramble_tile B_corner_2"></div>
+              </div>
+              <div class="scramble_row">
+                <div class="scramble_tile B_edge_4"></div>
+                <div class="scramble_tile B_center" ></div>
+                <div class="scramble_tile B_edge_2" ></div>
+              </div>
+              <div class="scramble_row">
+                <div class="scramble_tile B_corner_4" ></div>
+                <div class="scramble_tile B_edge_3" ></div>
+                <div class="scramble_tile B_corner_3" ></div>
+              </div>
+            </div>
+            <div class="scramble_face">
+              <div class="scramble_row">
+                <div class="scramble_tile L_corner_1" ></div>
+                <div class="scramble_tile L_edge_1" ></div>
+                <div class="scramble_tile L_corner_2" ></div>
+              </div>
+              <div class="scramble_row">
+                <div class="scramble_tile L_edge_4" ></div>
+                <div class="scramble_tile L_center" ></div>
+                <div class="scramble_tile L_edge_2" ></div>
+              </div>
+              <div class="scramble_row">
+                <div class="scramble_tile L_corner_4" ></div>
+                <div class="scramble_tile L_edge_3" ></div>
+                <div class="scramble_tile L_corner_3" ></div>
+              </div>
+            </div>
+
+          </div>
+
+          <div id="timer_digits_display">
+
+          </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src="control.js">
+    </script>
+  </body>
+</html>
